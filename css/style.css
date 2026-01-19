@@ -1,0 +1,427 @@
+/* ========================================
+1. CORE VARIABLES & RESET
+========================================
+*/
+:root {
+    --clay-brown: #a67c52;
+    --clay-dark: #8a6542;
+    --clay-light: #fdf8f4;
+    --stone-grey: #f4f1ee;
+    --charcoal: #333333;
+    --white: #ffffff;
+    --bg-stone: rgb(255, 255, 255);
+    --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-stone);
+    color: var(--charcoal);
+    line-height: 1.6;
+    padding-top: 72px; /* Prevents content from hiding under the sticky navbar */
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, .navbar-brand {
+    font-family: 'Playfair Display', serif;
+}
+
+.text-serif { 
+    font-family: 'Playfair Display', serif; 
+    font-style: italic; 
+}
+
+/* ========================================
+2. NAVIGATION BAR
+========================================
+*/
+.navbar {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px);
+    z-index: 2000;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.nav-link {
+    font-weight: 500;
+    margin-left: 15px;
+    transition: var(--transition);
+    position: relative;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--clay-brown) !important;
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 10px;
+    right: 10px;
+    height: 2px;
+    background-color: var(--clay-brown);
+}
+
+
+/* Vision Section Styling */
+.vision-section {
+    background-color: var(--bg-stone);
+    overflow: hidden;
+}
+
+.video-container {
+    position: relative;
+    aspect-ratio: 16 / 9; /* Cinematic Wide Screen */
+    background: #000;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    transition: var(--transition);
+}
+
+.video-container:hover .video-overlay {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.play-pulse {
+    width: 80px;
+    height: 80px;
+    background: rgba(166, 124, 82, 0.8); /* var(--clay-brown) with opacity */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(166, 124, 82, 0.7); }
+    70% { transform: scale(1); box-shadow: 0 0 0 20px rgba(166, 124, 82, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(166, 124, 82, 0); }
+}
+
+.tracking-widest {
+    letter-spacing: 0.3em;
+}
+
+.vision-divider {
+    width: 60px;
+    height: 2px;
+    background: var(--clay-brown);
+    margin: 0 auto;
+}
+
+/* Extra smooth reveal for the video frame */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* ========================================
+3. HERO SECTIONS
+========================================
+*/
+/* Home Hero with Dark Overlay */
+.hero {
+    height: 80vh;
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                url('https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&q=80&w=2000');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    margin-top: -72px; /* Pulls hero up to sit behind transparent-ish nav */
+}
+
+/* About Page Hero (Light) */
+.about-hero {
+    height: 45vh;
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-stone);
+}
+
+/* ========================================
+4. BENTO GRID SYSTEM (2026 Style)
+========================================
+*/
+.bento-card {
+    background: var(--white);
+    border-radius: 28px;
+    border: 1px solid rgba(0,0,0,0.04);
+    transition: var(--transition);
+    height: 100%;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+}
+
+.bento-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.08);
+}
+
+.bg-clay { background-color: var(--clay-brown) !important; color: white; }
+.bg-clay-light { background-color: var(--clay-light); }
+.text-clay { color: var(--clay-brown); }
+
+/* ========================================
+5. COMPONENTS (Buttons & Cards)
+========================================
+*/
+.btn-clay {
+    background-color: var(--clay-brown);
+    color: var(--white);
+    border-radius: 50px; /* Modern rounded buttons */
+    padding: 14px 35px;
+    border: none;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    transition: var(--transition);
+}
+
+.btn-clay:hover {
+    background-color: var(--clay-dark);
+    color: var(--white);
+    transform: translateY(-3px) scale(1.02);
+}
+
+.card {
+    border: none;
+    border-radius: 20px;
+    transition: var(--transition);
+    overflow: hidden;
+    background: var(--white);
+}
+
+.card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.card-img-top {
+    height: 350px;
+    object-fit: cover;
+}
+
+/* ========================================
+6. TESTIMONIALS (Slideshow)
+========================================
+*/
+.testimonial-section {
+    background-color: #ede9e6;
+}
+
+.testimonial-card {
+    max-width: 750px;
+    padding: 60px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(15px);
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    margin: 20px auto 60px;
+    text-align: center;
+}
+
+.stars { color: #d4a373; margin-bottom: 20px; }
+
+/* ========================================
+7. TIMELINE & ANIMATIONS
+========================================
+*/
+.timeline {
+    border-left: 2px solid var(--clay-brown);
+    padding-left: 40px;
+    max-width: 600px;
+    margin: 40px auto;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 50px;
+    opacity: 0; /* Handled by JS reveal */
+    transform: translateY(20px);
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -51px;
+    top: 5px;
+    width: 20px;
+    height: 20px;
+    background: var(--clay-brown);
+    border: 4px solid var(--white);
+    border-radius: 50%;
+}
+
+/* Scroll Reveal Classes */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ========================================
+8. FOOTER
+========================================
+*/
+.footer-advanced {
+    background-color: var(--white);
+    padding: 100px 0 40px;
+    border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+.social-icon {
+    width: 45px;
+    height: 45px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--stone-grey);
+    border-radius: 50%;
+    margin-right: 12px;
+    color: var(--charcoal);
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+.social-icon:hover {
+    background: var(--clay-brown);
+    color: var(--white);
+    transform: translateY(-5px);
+}
+
+/* ========================================
+9. RESPONSIVE MEDIA QUERIES
+========================================
+*/
+@media (max-width: 768px) {
+    body { padding-top: 60px; }
+    .hero { height: 60vh; margin-top: -60px; }
+    .display-1 { font-size: 3.5rem; }
+    .testimonial-card { padding: 40px 20px; margin: 0 15px 40px; }
+    .bento-card { margin-bottom: 15px; }
+}
+
+
+/* Contact Page Specifics */
+.contact-info-wrapper {
+    padding: 20px 0;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.icon-box {
+    width: 60px;
+    height: 60px;
+    background: var(--white);
+    color: var(--clay-brown);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+/* Floating Form Styles */
+.form-floating > .form-control,
+.form-floating > .form-select {
+    border: none;
+    background: var(--bg-stone);
+    border-radius: 15px;
+    padding-left: 20px;
+}
+
+.form-floating > label {
+    padding-left: 20px;
+    color: #888;
+}
+
+.form-control:focus {
+    background-color: var(--white);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.map-container {
+    transition: var(--transition);
+}
+
+.map-container:hover {
+    filter: none;
+    transform: scale(1.02);
+}
+
+
+
+.product-split {
+    height: 100%;
+    border: none;
+    background: #fff;
+    transition: var(--transition);
+}
+
+.product-split img {
+    transition: transform 0.6s ease;
+}
+
+.product-split:hover img {
+    transform: scale(1.05);
+}
+
+.tracking-widest {
+    letter-spacing: 0.2rem;
+}
+
+/* Adjust object-fit for the product images */
+.object-fit-cover {
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .product-split img {
+        height: 250px !important;
+        width: 100%;
+    }
+}
+
